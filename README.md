@@ -51,6 +51,19 @@ WebScrapingProducts/
 ```
 ***
 
+
+| **Arquivos**                | **Descrição**                                                              |
+|:-------------------------:|---------------------------------------------------------------------------|
+| **categories.py**         | Script para obter as categorias disponíveis no site                        |
+| **main.py**               | Ponto de entrada para a execução do coletor                                |
+| **menu_utils.py**         | Utilitários para a interação com o usuário e escolha da categoria          |
+| **pagination_utils.py**   | Funções para verificar a paginação e navegar entre as páginas              |
+| **products.py**           | Funcionalidades relacionadas à coleta de informações dos produtos          |
+| **screenshot_utils.py**   | Utilitário para tirar screenshots dos produtos                             |
+| **table_utils.py**        | Funções para criar tabelas em formato HTML e exibir resultados formatados  |
+| **webdriver_setup.py**    | Configurações do webdriver para automação do navegador                     |
+
+
 ## Como Utilizar
 
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
