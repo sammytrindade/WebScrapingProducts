@@ -17,3 +17,21 @@ def showDateAndHour():
     date = today.strftime("%d-%m-%Y")
     return date, hour
 
+
+def get_product_details(driver, product_link):
+    driver.get(product_link)
+    sleep(3)
+
+    product_name_element = driver.find_element(By.CLASS_NAME, 'product-name')
+    product_name = product_name_element.text.strip()
+
+    product_price_element = driver.find_element(By.ID, 'variacaoPreco')
+    product_price = product_price_element.text.strip()
+
+    currency_element = driver.find_element(By.CLASS_NAME, 'currency')
+    currency = currency_element.text.strip()
+
+    product_code_element = driver.find_element(By.ID, 'product-reference')
+    product_code = product_code_element.text.strip()
+    return product_name, product_price, currency, product_code
+
