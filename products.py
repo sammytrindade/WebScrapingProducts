@@ -35,3 +35,27 @@ def get_product_details(driver, product_link):
     product_code = product_code_element.text.strip()
     return product_name, product_price, currency, product_code
 
+
+def process_products(driver, products, data_df):
+    products_links = []
+    for product in products:
+        href_products = product.find_element(
+            By.CSS_SELECTOR, '.product-body .product-info')
+        product_link = href_products.get_attribute('href')
+        products_links.append(product_link)
+    for product_link in products_links:
+        print(f"Navegando para o produto: {product_link}")
+        current_page_url = driver.current_url
+        driver.get(product_link)
+        sleep(2)
+
+        product_name, product_price, currency, product_code = get_product_details(
+            driver, product_link)
+        date, hour = showDateAndHour()
+        screenshot_filename = take_screenshot(product_code, product_name, date)
+        table = create_table(product_name, product_code, product_price,
+                             currency, product_link, date, screenshot_filename)
+        data_df.append(table)
+        driver.get(current_page_url)
+        sleep(2)
+
