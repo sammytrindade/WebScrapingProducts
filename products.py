@@ -20,7 +20,7 @@ def showDateAndHour():
 
 def get_product_details(driver, product_link):
     driver.get(product_link)
-    sleep(3)
+    # sleep(3)
 
     product_name_element = driver.find_element(By.CLASS_NAME, 'product-name')
     product_name = product_name_element.text.strip()
@@ -47,24 +47,25 @@ def process_products(driver, products, data_df):
         print(f"Navegando para o produto: {product_link}")
         current_page_url = driver.current_url
         driver.get(product_link)
-        sleep(2)
+        # sleep(2)
 
         product_name, product_price, currency, product_code = get_product_details(
             driver, product_link)
         date, hour = showDateAndHour()
         screenshot_filename = take_screenshot(product_code, product_name, date)
+        sleep(2)
         table = create_table(product_name, product_code, product_price,
                              currency, product_link, date, screenshot_filename)
         data_df.append(table)
         driver.get(current_page_url)
-        sleep(2)
+        # sleep(2)
 
 
 def process_products_based_on_category(chosen_category):
     driver = webdriver_configurations()
     url = chosen_category
     driver.get(url)
-    sleep(10)
+    # sleep(10)
     data_df = []
 
     products = driver.find_elements(By.CLASS_NAME, 'product')
@@ -85,7 +86,7 @@ def process_products_based_on_category(chosen_category):
             products = driver.find_elements(By.CLASS_NAME, 'product')
             process_products(driver, products, data_df)
             driver.get(current_page_url)
-            sleep(2)
+            # sleep(2)
 
 
     if not has_products(driver):

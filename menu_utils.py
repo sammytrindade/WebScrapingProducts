@@ -18,7 +18,7 @@ def select_category_and_navigate():
         print(f"Você escolheu: {chosen_category} - Link: {chosen_link}")
 
         driver.get(chosen_link)
-        sleep(3)
+        # sleep(3)
         return chosen_link
     return None
 
