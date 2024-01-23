@@ -25,3 +25,17 @@ def sanitize_filename(filename):
     filename = filename.replace('https://www.marchio.com/', '')
     return filename
 
+
+def save_table_to_html(table, name_category):
+    try:
+        table_dir = 'table'
+        if not os.path.exists(table_dir):
+            os.makedirs(table_dir)
+        sanitized_product_name = sanitize_filename(name_category)
+        file_name = f"{sanitized_product_name}_table.html"
+        file_path = os.path.join(table_dir, file_name)
+        with open(file_path, 'w') as f:
+            f.write(tabulate(table, headers='keys', tablefmt='html'))
+        print(f"Tabela salva em: {file_path}")
+    except Exception as e:
+        print(f"Erro ao criar tabela: {e}")
