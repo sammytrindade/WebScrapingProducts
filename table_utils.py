@@ -19,3 +19,9 @@ def print_table(data_df, chosen_category):
                     colalign=['left']*len(table_headers))
     save_table_to_html(data_df, chosen_category)
     print(data)
+
+
+def sanitize_filename(filename):
+    filename = filename.replace('https://www.marchio.com/', '')
+    return filename
+
