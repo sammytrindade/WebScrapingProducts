@@ -28,3 +28,14 @@ def get_total_pages(driver):
         return 0
 
 
+def navigate_to_page(driver, category_link, page_number):
+    try:
+        if '?' in category_link:
+            page_link = f"{category_link}&pg={page_number}"
+        else:
+            page_link = f"{category_link}?pg={page_number}"
+
+        driver.get(page_link)
+        sleep(2) 
+    except Exception as e:
+        print(f"Erro ao navegar para a página {page_number}: {e}")
