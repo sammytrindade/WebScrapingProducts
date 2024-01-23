@@ -36,6 +36,6 @@ def navigate_to_page(driver, category_link, page_number):
             page_link = f"{category_link}?pg={page_number}"
 
         driver.get(page_link)
-        sleep(2) 
+        # sleep(2) 
     except Exception as e:
         print(f"Erro ao navegar para a página {page_number}: {e}")
