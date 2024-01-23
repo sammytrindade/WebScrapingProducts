@@ -9,3 +9,12 @@ def check_pagination(driver):
         return True
     except NoSuchElementException:
         return False
+
+
+def has_products(driver):
+    try:
+        driver.find_element(By.CLASS_NAME, 'catalog-empty')
+        return False
+    except NoSuchElementException:
+        return True
+
