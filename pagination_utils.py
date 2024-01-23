@@ -18,3 +18,13 @@ def has_products(driver):
     except NoSuchElementException:
         return True
 
+
+def get_total_pages(driver):
+    try:
+        pagination = driver.find_element(By.CLASS_NAME, 'catalog-footer')
+        pages = pagination.find_elements(By.CLASS_NAME, 'page')
+        return len(pages) - 1
+    except NoSuchElementException:
+        return 0
+
+
