@@ -59,3 +59,38 @@ def process_products(driver, products, data_df):
         driver.get(current_page_url)
         sleep(2)
 
+
+def process_products_based_on_category(chosen_category):
+    driver = webdriver_configurations()
+    url = chosen_category
+    driver.get(url)
+    sleep(10)
+    data_df = []
+
+    products = driver.find_elements(By.CLASS_NAME, 'product')
+    total_products = len(products)
+    print(f"Número de produtos na página: {total_products}")
+
+    if total_products > 0:
+        process_products(driver, products, data_df)
+
+    if check_pagination(driver):
+        total_pages = get_total_pages(driver)
+        print(f"Total de páginas: 'products' {total_pages}")
+
+        for page_number in range(2, total_pages + 1):
+            print(f"Navegando para a página 'products' {page_number}")
+            navigate_to_page(driver, url, page_number)
+            current_page_url = driver.current_url
+            products = driver.find_elements(By.CLASS_NAME, 'product')
+            process_products(driver, products, data_df)
+            driver.get(current_page_url)
+            sleep(2)
+
+
+    if not has_products(driver):
+        print("Nenhum produto foi encontrado!")
+        driver.quit()
+
+    print_table(data_df, chosen_category)
+    driver.quit()
